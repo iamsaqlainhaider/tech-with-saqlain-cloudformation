@@ -1,0 +1,5 @@
+*.pem
+.deploystack.yaml
+.aws-sam/
+.env
+demo.pem
