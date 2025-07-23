@@ -6,7 +6,9 @@ echo "🚀 Deploying Amazon Connect - EC2 & HealthDashboard Stack"
 
             # e.g. static stack name
 
-_tags="Name=amazonconnect Environment=prod BillingCustomer=amazonconnect"
+_tags="Name=Techwithsaqlain Environment=prod BillingCustomer=Techwithsaqlain"
+_instance_type="t3.micro"
+
 
 
 echo "🌍 Region      : $_region"
@@ -22,7 +24,9 @@ sam deploy --confirm-changeset \
     --s3-bucket techwithsaqlain-demo-bucket-artifacts \
     --s3-prefix techwithsaqlain-demo  \
     --tags "$_tags" \
-    --capabilities CAPABILITY_NAMED_IAM
+    --capabilities CAPABILITY_NAMED_IAM \
+    --parameter-overrides InstanceType="$_instance_type"
+
 
 if [ $? -eq 0 ]; then
     echo "✅ Deployment complete for stack: $_stackname"
