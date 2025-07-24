@@ -7,7 +7,8 @@ echo "🚀 Deploying Amazon Connect - EC2 & HealthDashboard Stack"
             # e.g. static stack name
 
 _tags="Name=Techwithsaqlain Environment=prod BillingCustomer=Techwithsaqlain"
-_instance_type="t3.micro"
+_instance_type="t2.micro"
+
 
 
 

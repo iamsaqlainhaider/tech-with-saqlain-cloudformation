@@ -4,12 +4,7 @@ Description: Launch a simple EC2 instance
 Parameters:
   InstanceType:
     Type: String
-    Default: t3.micro
-    AllowedValues:
-      - t2.micro
-      - t3.micro
-      - t3.small
-    Description: EC2 instance type
+    
 
 
 Resources:
@@ -17,4 +12,4 @@ Resources:
      Type: AWS::EC2::Instance
      Properties: 
         ImageId: ami-01347fdc7a9172350
-        InstanceType: !!Ref InstanceType
+        InstanceType: !Ref InstanceType

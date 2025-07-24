@@ -1,10 +1,14 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Launch a simple EC2 instance
+Parameters:
+  InstanceType:
+    Type: String
 Resources:
   myInstance:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: ami-01347fdc7a9172350
-      InstanceType: t3.micro
+      InstanceType:
+        Ref: InstanceType
     Metadata:
       SamResourceId: myInstance
