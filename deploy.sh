@@ -1,34 +1,39 @@
 #!/bin/bash
 
-echo "🚀 Deploying Amazon Connect - EC2 & HealthDashboard Stack"
+# -------------------------------------------------------------------
+# 🚀 Deploying Amazon Connect - EC2 & HealthDashboard Stack
+# -------------------------------------------------------------------
 
-# Fixed parameters
-
-            # e.g. static stack name
-
+# Define fixed and user-defined parameters
+_region="ap-southeast-2"
+_env="uat"
+_bucket="techwithsaqlain-demo-bucket-artifacts"
+_template="deploystack.yaml"
+_stackname="techwithsaqlain-demo"
+_image_ami="ami-01347fdc7a9172350"
 _tags="Name=Techwithsaqlain Environment=prod BillingCustomer=Techwithsaqlain"
-_instance_type="t2.micro"
 
-
-
-
+# Logging the deployment context
 echo "🌍 Region      : $_region"
 echo "🪣 S3 Bucket   : $_bucket"
 echo "📄 Template    : $_template"
 echo "📦 Stack Name  : $_stackname"
+echo "🖼️  AMI ID     : $_image_ami"
+echo "🏷️ Tags        : $_tags"
+echo "🏷️ Environment : $_env"
 
-# Deploy the stack
+# Deploy the stack using AWS SAM CLI
 sam deploy --confirm-changeset \
-    --region ap-southeast-2 \
-    --template-file deploystack.yaml \
-    --stack-name techwithsaqlain-demo \
-    --s3-bucket techwithsaqlain-demo-bucket-artifacts \
-    --s3-prefix techwithsaqlain-demo  \
+    --region "$_region" \
+    --template-file "$_template" \
+    --stack-name "$_stackname" \
+    --s3-bucket "$_bucket" \
+    --s3-prefix "$_stackname" \
     --tags "$_tags" \
     --capabilities CAPABILITY_NAMED_IAM \
-    --parameter-overrides InstanceType="$_instance_type"
+    --parameter-overrides Imageami="$_image_ami" Env="$_env"
 
-
+# Check deployment status
 if [ $? -eq 0 ]; then
     echo "✅ Deployment complete for stack: $_stackname"
 else
